@@ -87,6 +87,10 @@ if algorithm == "KMeans":
     # Perform KMeans clustering
     kmeans = perform_kmeans(X_scaled, n_clusters, random_state)
     
+    # Print KMeans labels and shape
+    st.write("KMeans Labels:", kmeans.labels_)
+    st.write("KMeans Labels Shape:", kmeans.labels_.shape)
+    
     # Calculate silhouette score
     silhouette_avg = silhouette_score(X_scaled, kmeans.labels_)
     st.write("Silhouette Score:", silhouette_avg)
