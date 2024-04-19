@@ -83,6 +83,17 @@ if algorithm == "KMeans":
     ax1.grid(True)
     st.pyplot(fig1)
 
+    fig3, ax1 = plt.subplots(figsize=(10, 6))
+    for cluster in data['cluster'].unique():
+        cluster_data = data[data['cluster'] == cluster]
+        ax1.scatter(cluster_data['gdp_per_capita ($)'], cluster_data['HDI'], label=f'Cluster {cluster}')
+    ax1.set_title('Clusters of Countries based on Suicide Rates and GDP per Capita')
+    ax1.set_xlabel('GDP per Capita ($)')
+    ax1.set_ylabel('HDI')
+    ax1.legend()
+    ax1.grid(True)
+    st.pyplot(fig3)
+
     fig2 = plt.figure(figsize=(10, 6))
     ax2 = fig2.add_subplot(111, projection='3d')
     for cluster in data['cluster'].unique():
@@ -122,6 +133,17 @@ else:
     plt.legend(title='Cluster')
     plt.grid(True)
     st.pyplot(plt)
+
+    # Visualize the clusters for Hierarchical clustering
+    plt.figure(figsize=(10, 6))
+    sns.scatterplot(x=X[:, 1], y=X[:, 2], hue=cluster_labels_hierarchical, palette='viridis')
+    plt.title('Hierarchical Clustering')
+    plt.xlabel('GDP per Capita ($)')
+    plt.ylabel('HDI')
+    plt.legend(title='Cluster')
+    plt.grid(True)
+    st.pyplot(plt)
+
 
     # Perform hierarchical clustering with linkage method 'ward'
     Z = linkage(X, method=linkage_method)
